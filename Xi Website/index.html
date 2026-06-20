@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEEN — A Memorial for Lost Privacy</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/animejs/dist/bundles/anime.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- CONSENT FAKE-OUT -->
+  <div class="consent-banner" id="consentBanner">
+    <div class="consent-inner">
+      <div class="consent-tag">NOTICE</div>
+      <p class="consent-text">This site collects behavioural data including cursor position, scroll depth, hesitation patterns, and session duration. By continuing you acknowledge this collection.</p>
+      <button class="consent-btn" id="consentBtn">Acknowledge</button>
+    </div>
+  </div>
+
+  <!-- INTRO FLASH -->
+  <div class="intro-flash" id="introFlash" aria-hidden="true"></div>
+
+  <!-- CRT SCANLINE OVERLAY -->
+  <div class="crt-overlay" aria-hidden="true"></div>
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- ===================== LEFT SIDEBAR ===================== -->
+  <aside class="left-sidebar" id="leftSidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-status-row">
+        <span class="status-dot active" id="sdot1"></span>
+        <span class="sidebar-label">SYS ONLINE</span>
+      </div>
+      <div class="sidebar-status-row">
+        <span class="status-dot recording" id="sdot2"></span>
+        <span class="sidebar-label">RECORDING</span>
+      </div>
+      <div class="sidebar-status-row">
+        <span class="status-dot" id="sdot3"></span>
+        <span class="sidebar-label">TRANSMIT</span>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-vertical-label">S · U · R · V · E · I · L · L · A · N · C · E</div>
+    </div>
+
+    <div class="sidebar-terminal" id="sidebarTerminal">
+      <!-- terminal lines injected by JS -->
+    </div>
+
+    <div class="sidebar-bottom">
+      <div class="sidebar-label-sm">NODE 01 // ACTIVE</div>
+      <div class="sidebar-label-sm" id="sidebarTime">00:00:00</div>
+    </div>
+  </aside>
+
+  <!-- GLOBAL EYE -->
+  <div class="global-eye" id="globalEye">
+    <canvas id="eyeCanvas" width="260" height="260"></canvas>
+    <span class="eye-label">MONITORING</span>
+  </div>
+
+  <!-- RECORDING INDICATOR -->
+  <div class="rec-indicator">
+    <span class="rec-dot"></span>
+    <span class="rec-text">REC</span>
+  </div>
+
+  <!-- ===================== SCREEN 01: LANDING ===================== -->
+  <section class="screen" id="screen01">
+    <div class="screen-number">01 / 04</div>
+
+    <div class="landing-content">
+      <div class="landing-tag" id="landingTag">CASE FILE #2031-PRV</div>
+      <h1 class="landing-title" id="landingTitle">SEEN</h1>
+      <p class="landing-sub" id="landingSub">A Memorial for Lost Privacy</p>
+      <p class="landing-body" id="landingBody">
+        You opened this page
+        <span class="data-inline" id="timeAgo">moments ago</span>.
+        Since then, this site has been watching. Not maliciously.
+        Institutionally. The way everything watches you now.
+      </p>
+      <div class="research-question" id="landingQuote">
+        &ldquo;How can visual design provoke a public response to the growing threat of surveillance and privacy loss?&rdquo;
+      </div>
+      <button class="enter-btn" id="landingBtn" onclick="scrollToSection('screen02')">
+        Enter the Archive
+        <span class="btn-arrow">&#8594;</span>
+      </button>
+    </div>
+
+    <div class="live-data-panel" id="livePanel01">
+      <div class="data-panel-header">SUBJECT DATA STREAM</div>
+      <div class="data-row"><span class="data-key">SESSION ID</span><span class="data-val" id="sessionId">---</span></div>
+      <div class="data-row"><span class="data-key">TIME ON PAGE</span><span class="data-val" id="timeOnPage">00:00</span></div>
+      <div class="data-row"><span class="data-key">CURSOR X</span><span class="data-val" id="cursorX">---</span></div>
+      <div class="data-row"><span class="data-key">CURSOR Y</span><span class="data-val" id="cursorY">---</span></div>
+      <div class="data-row"><span class="data-key">SCROLL DEPTH</span><span class="data-val" id="scrollDepth">0%</span></div>
+      <div class="data-row"><span class="data-key">HESITATIONS</span><span class="data-val" id="hesitations">0</span></div>
+      <div class="data-row"><span class="data-key">THREAT LEVEL</span><span class="data-val threat" id="threatLevel">LOW</span></div>
+    </div>
+
+    <div class="screen-terminal" id="terminalS1">
+      <div class="term-line"><span class="term-prompt">&gt;</span><span class="term-text" id="tl1"></span></div>
+      <div class="term-line"><span class="term-prompt">&gt;</span><span class="term-text" id="tl2"></span></div>
+      <div class="term-line"><span class="term-prompt">&gt;</span><span class="term-text" id="tl3"></span></div>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 02: ARCHIVE ===================== -->
+  <section class="screen" id="screen02">
+    <div class="screen-number">02 / 04</div>
+    <div class="section-header">
+      <div class="section-tag">THE ARCHIVE</div>
+      <h2 class="section-title">Extinct Concepts</h2>
+      <p class="section-desc">
+        The following rights and experiences were once considered fundamental to human existence.
+        They are presented here as historical artefacts.
+      </p>
+    </div>
+
+    <div class="archive-grid">
+      <div class="archive-card" data-concept="anonymous-browsing" data-status="EXTINCT" data-tag="Interest in digital anonymity">
+        <div class="card-status extinct">EXTINCT</div>
+        <div class="card-date">Est. 1991 &mdash; Declared lost: 2031</div>
+        <h3 class="card-title">Anonymous Browsing</h3>
+        <p class="card-body">The belief that a person could navigate the internet without their identity being permanently attached to each action. Browser fingerprinting, device IDs, and real time identity verification rendered this concept functionally obsolete before its formal end was declared.</p>
+        <div class="card-footer">
+          <span class="survival-bar"><span class="survival-fill" data-target="0"></span></span>
+          <span class="survival-label">0% survival probability</span>
+        </div>
+      </div>
+
+      <div class="archive-card" data-concept="untracked-movement" data-status="EXTINCT" data-tag="Concern about physical surveillance">
+        <div class="card-status extinct">EXTINCT</div>
+        <div class="card-date">Est. forever &mdash; Declared lost: 2034</div>
+        <h3 class="card-title">Untracked Movement</h3>
+        <p class="card-body">The ability to move through public space without being continuously logged. Real time facial recognition, gait analysis, and connected sensor networks eliminated this concept entirely. Your location, route, duration, and social connections in public are now permanent records.</p>
+        <div class="card-footer">
+          <span class="survival-bar"><span class="survival-fill" data-target="0"></span></span>
+          <span class="survival-label">0% survival probability</span>
+        </div>
+      </div>
+
+      <div class="archive-card" data-concept="private-thought" data-status="CRITICAL" data-tag="High concern — cognitive privacy focus">
+        <div class="card-status critical">CRITICAL</div>
+        <div class="card-date">Est. origin of consciousness &mdash; Status: under threat</div>
+        <h3 class="card-title">Private Thought</h3>
+        <p class="card-body">Neural interface technology, developed under the premise of medical necessity, began harvesting emotional response data, attention patterns, and pre verbal cognitive signals. As adoption became near universal, the boundary between thought and data dissolved. Not yet extinct. Barely.</p>
+        <div class="card-footer">
+          <span class="survival-bar"><span class="survival-fill" data-target="4"></span></span>
+          <span class="survival-label">4% survival probability</span>
+        </div>
+      </div>
+
+      <div class="archive-card" data-concept="right-to-be-forgotten" data-status="ENDANGERED" data-tag="Awareness of legal privacy rights">
+        <div class="card-status endangered">ENDANGERED</div>
+        <div class="card-date">Est. 2014 (EU) &mdash; Status: critically weakened</div>
+        <h3 class="card-title">The Right to Be Forgotten</h3>
+        <p class="card-body">Once a legally protected right allowing individuals to request deletion of their personal data. Successive policy rollbacks under pressure from commercial and governmental interests have reduced this right to a formality. Requests are technically accepted and rarely actioned.</p>
+        <div class="card-footer">
+          <span class="survival-bar"><span class="survival-fill" data-target="12"></span></span>
+          <span class="survival-label">12% survival probability</span>
+        </div>
+      </div>
+
+      <div class="archive-card" data-concept="opt-out" data-status="EXTINCT" data-tag="Interest in data consent mechanisms">
+        <div class="card-status extinct">EXTINCT</div>
+        <div class="card-date">Est. 1990s &mdash; Declared lost: 2029</div>
+        <h3 class="card-title">Opt Out Consent</h3>
+        <p class="card-body">The theoretical option to refuse data collection while still participating in modern society. As surveillance became embedded in employment, healthcare, transport, and housing systems, opting out became indistinguishable from opting out of society itself. The option was quietly removed.</p>
+        <div class="card-footer">
+          <span class="survival-bar"><span class="survival-fill" data-target="0"></span></span>
+          <span class="survival-label">0% survival probability</span>
+        </div>
+      </div>
+
+      <div class="archive-card" data-concept="private-communication" data-status="EXTINCT" data-tag="Concern about communication privacy">
+        <div class="card-status extinct">EXTINCT</div>
+        <div class="card-date">Est. origin of language &mdash; Declared lost: 2033</div>
+        <h3 class="card-title">Private Communication</h3>
+        <p class="card-body">The assumption that a conversation between two people was known only to those two people. End to end encryption was systematically legislated against under national security frameworks across most jurisdictions. All digital communication is now retained, searchable, and cross referenced.</p>
+        <div class="card-footer">
+          <span class="survival-bar"><span class="survival-fill" data-target="0"></span></span>
+          <span class="survival-label">0% survival probability</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen-terminal" id="terminalS2">
+      <div class="term-line"><span class="term-prompt">&gt;</span><span class="term-text" id="tl4"></span></div>
+      <div class="term-line"><span class="term-prompt">&gt;</span><span class="term-text" id="tl5"></span></div>
+    </div>
+
+    <div class="archive-cta">
+      <button class="enter-btn" onclick="scrollToSection('screen03')">
+        See Your Profile
+        <span class="btn-arrow">&#8594;</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 03: MIRROR ===================== -->
+  <section class="screen" id="screen03">
+    <div class="screen-number">03 / 04</div>
+    <div class="section-header">
+      <div class="section-tag">THE MIRROR MOMENT</div>
+      <h2 class="section-title">What You Gave Away</h2>
+      <p class="section-desc">
+        This is the profile this site built while you were reading about privacy loss.
+        You were not warned. You did not consent. That was the point.
+      </p>
+    </div>
+
+    <div class="mirror-layout">
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-tag">COMPILED SUBJECT FILE</div>
+          <div class="profile-id" id="profileId">FILE #---</div>
+        </div>
+        <div class="profile-data">
+          <div class="profile-row"><span class="pk">Total session time</span><span class="pv" id="totalTime">calculating...</span></div>
+          <div class="profile-row"><span class="pk">Pages visited</span><span class="pv" id="pagesVisited">3 of 4</span></div>
+          <div class="profile-row"><span class="pk">Total cursor movements</span><span class="pv" id="totalMoves">---</span></div>
+          <div class="profile-row"><span class="pk">Hesitations detected</span><span class="pv" id="totalHesitations">---</span></div>
+          <div class="profile-row"><span class="pk">Reading pace</span><span class="pv" id="readingPace">---</span></div>
+          <div class="profile-row"><span class="pk">Inferred engagement</span><span class="pv" id="engagement">---</span></div>
+          <div class="profile-row"><span class="pk">Inferred concern level</span><span class="pv" id="concernLevel">---</span></div>
+          <div class="profile-row"><span class="pk">Data broker value</span><span class="pv highlight" id="brokerValue">---</span></div>
+          <!-- PROFILE TAGS — populated as user hovers cards -->
+          <div class="profile-row profile-tags-row" id="profileTagsRow" style="display:none;">
+            <span class="pk">Flagged interests</span>
+            <span class="pv" id="profileTagsList"></span>
+          </div>
+        </div>
+        <div class="profile-footer">
+          This data was collected in <span id="collectionTime">---</span> minutes.<br/>
+          Imagine a lifetime.
+        </div>
+        <!-- DOWNLOAD DOSSIER BUTTON -->
+        <div class="profile-download">
+          <button class="dossier-btn" id="dossierBtn">
+            &#8659; Download Your Dossier
+          </button>
+        </div>
+      </div>
+
+      <div class="mirror-text">
+        <p class="mirror-statement">
+          Every site you visit does this. Most do far more. The difference is that here, you can see it.
+        </p>
+        <p class="mirror-body">
+          The data points above are real. They were genuinely collected from your session using standard browser accessible JavaScript, the same methods used by thousands of commercial websites right now, without disclosure.
+        </p>
+        <p class="mirror-body">
+          SEEN was designed to make you feel what reading about surveillance cannot.
+          The discomfort you may feel looking at that profile is the correct response.
+          It means the design worked.
+        </p>
+        <div class="mirror-quote">
+          &ldquo;Privacy is not about having something to hide. It is about having something to lose.&rdquo;
+        </div>
+
+        <div class="screen-terminal inline-terminal" id="terminalS3">
+          <div class="term-line"><span class="term-prompt">&gt;</span><span class="term-text" id="tl6"></span></div>
+          <div class="term-line"><span class="term-prompt">&gt;</span><span class="term-text" id="tl7"></span></div>
+          <div class="term-line"><span class="term-prompt">&gt;</span><span class="term-text" id="tl8"></span></div>
+        </div>
+
+        <div class="mirror-credits">
+          A conceptual design artefact by a student of Visual Communication Design.<br/>
+          Built as part of Assessment 2, Future Technologies and Design Outputs.
+        </div>
+
+        <button class="enter-btn closing-cta" onclick="scrollToSection('screen04')" style="margin-top:32px;">
+          What Happens Next
+          <span class="btn-arrow">&#8594;</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 04: CLOSING ===================== -->
+  <section class="screen" id="screen04">
+    <div class="screen-number">04 / 04</div>
+
+    <div class="closing-layout">
+      <div class="closing-header">
+        <div class="section-tag">RETENTION NOTICE</div>
+        <h2 class="closing-title">This Profile Will Be Retained</h2>
+      </div>
+
+      <div class="closing-body">
+        <p class="closing-statement">
+          The session you just completed has been logged. Not by a hostile actor. By a design student, making a point. But the methods used here are identical to those used by the systems that will retain your data indefinitely.
+        </p>
+        <p class="closing-statement">
+          Deletion was scheduled for:
+        </p>
+        <div class="countdown-wrap">
+          <div class="countdown-display" id="retentionCountdown">00:00:00</div>
+          <div class="countdown-label">Time until deletion</div>
+        </div>
+        <p class="closing-statement closing-small">
+          The counter above will never reach zero. This is not a technical error.
+        </p>
+      </div>
+
+      <div class="closing-terminal" id="terminalS4">
+        <div class="term-line"><span class="term-prompt">&gt;</span><span class="term-text" id="tl9"></span></div>
+        <div class="term-line"><span class="term-prompt">&gt;</span><span class="term-text" id="tl10"></span></div>
+        <div class="term-line"><span class="term-prompt">&gt;</span><span class="term-text" id="tl11"></span></div>
+      </div>
+
+      <div class="closing-credits">
+        <div class="closing-credits-text">
+          SEEN — A Memorial for Lost Privacy<br/>
+          A conceptual design artefact. All data collected in this session was never transmitted or stored outside your browser.<br/>
+          The experience was designed to be uncomfortable. That was the point.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
